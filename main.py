@@ -31,26 +31,6 @@ def accueil():
     phbc = random.choice(['Entrez le texte à générer ici.',"Votre texte s'il vous plait.",'Veillez saisir votre texte ici.'])
     return render_template('index.html',placeholder_bc = phbc,placeholder_qr = phqr)
 
-@app.route('/generate', methods=['POST'])
-def generate():    
-    d = date.today().isoformat()
-    mdp = request.form['char']
-    
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction = qrcode.constants.ERROR_CORRECT_L,
-        box_size = 10,
-        border = 2,
-        )
-        
-    qr.add_data(mdp)
-    qr.make(fit = True)
-
-    img = qr.make_image(fill_color = "blue", back_color="white")
-    img.save("qr__.jpg")
-    
-    return render_template('index.html', date = d, image_path = img)
-
 @app.route('/qrcodegen', methods=['GET', 'POST'])
 def qrcodegen():
     qr_code_data = None  # Variable pour stocker le QR Code
