@@ -57,7 +57,7 @@ def qrcodegen():
 
             # Encoder l'image en base64 pour l'afficher dans HTML
             qr_code_data = base64.b64encode(img_io.getvalue()).decode('utf-8')
-    return render_template('index.html', qr_code_data=qr_code_data,placeholder_bc = phbc,placeholder_qr = phqr, texte_saisi = text)
+    return render_template('index.html', qr_code_data=qr_code_data,placeholder_bc = phbc,placeholder_qr = phqr, texte_saisi_qr = text)
     
 @app.route('/barcodegen', methods=['GET', 'POST'])
 def barcodegen():
@@ -82,4 +82,4 @@ def barcodegen():
     return render_template('index.html', bar_code_data = bar_code_data, placeholder_bc = phbc, placeholder_qr = phqr, texte_saisi_bc = text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host = '192.168.137.1', port = 5000, debug=True)
