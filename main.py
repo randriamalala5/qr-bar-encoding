@@ -50,7 +50,7 @@ def qrcodegen():
             qr.make(fit=True)
 
             # Convertir le QR Code en image binaire
-            img = qr.make_image(fill_color="blue", back_color="white")
+            img = qr.make_image(fill_color="black", back_color="white")
             img_io = io.BytesIO()
             img.save(img_io, 'PNG')
             img_io.seek(0)
