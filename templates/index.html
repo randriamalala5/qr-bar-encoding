@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/css.css') }}" type="text/css">
+    <script src="../statics/js/js.js"></script>
+    <title>QR code encoding</title>
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/qrcode.png') }}">
+	
+	<style>
+        #qr-container img {
+            max-width: 300px;
+            max-height: 300px;
+        }
+    </style>
+</head>
+
+<body class='bg-light'>
+	<header id='fixed-header' class="fixed-top bg-dark text-white p-3 text-center shadow">
+		<!--<h2 class="text-center">Bienvenue sur notre générateur de Code QR !</h2>
+		<p class="text-center d-none d-md-block">Nous sommes le <span id="current-date"></span>. Commencez à générer vos QR Codes dès maintenant !</p> -->
+		
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id = "navbarmain">
+			<div class="container-fluid">
+				<div class="d-flex justify-content-center flex-grow-1" id="navbarNav"><!-- collapse navbar-collapse -->
+					<ul class="navbar-nav ms-auto d-flex justify-content-center flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link active" href="#" id="nav-qr">QRCode</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" id="nav-bc">BarCode</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		
+		<script>
+			function adjustPadding() {
+				let header = document.querySelector('#fixed-header');
+				document.body.style.paddingTop = header.offsetHeight + "px";
+			}
+
+			// Ajuste au chargement et lors du redimensionnement
+			window.onload = adjustPadding;
+			window.onresize = adjustPadding;
+		</script>
+	</header>
+		
+    <div id = 'content' class = 'container d-flex flex-column justify-content-center align-items-center vh-100'>
+		<div>
+			<h2 class="text-center">Bienvenue sur notre générateur de Code QR !</h2>
+			<p class="text-center d-none d-md-block">Nous sommes le <span id="current-date"></span>. Commencez à générer vos QR Codes dès maintenant !</p>
+		</div>
+		<script>
+			const currentDate = new Date();
+			const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+			document.getElementById('current-date').textContent = currentDate.toLocaleDateString('fr-FR', options);
+		</script>
+        <div class="content">
+			<div id = 'form-qr' class="form-container w-100 text-center">
+				<h3>Pour encoder un QRCode </h3>
+				<form action="/qrcodegen" method="post" class="mb-4">
+					<div class='mb-3'>
+						<textarea class="form-control" placeholder="{{placeholder_qr}}"  name="char" id="char" cols="35" rows="20">{{ texte_saisi_qr }}</textarea>
+					</div>
+					
+					<div class="d-flex justify-content-center">
+						<button id = 'btn-encoder-qr' type="submit" class="btn btn-dark">Encoder</button>
+					</div>
+				</form>
+			</div>
+			
+			<div id = 'form-bc' class="form-container w-100 text-center" style = "display: none;">
+				<h3>Pour encoder un BarCode </h3>
+				<form action="/barcodegen" method="post" class="mb-4">
+					<div class='mb-3'>
+						<textarea class="form-control" placeholder="{{placeholder_bc}}" name="char_bar" id="char_bar" cols="35" rows="20" required> {{ texte_saisi_bc }} </textarea>
+					</div>
+					
+					<div class="d-flex justify-content-center">
+						<button id = 'btn-encoder-bc' type="submit" class="btn btn-dark">Encoder</button>
+					</div>
+				</form>
+			</div> 
+			
+        </div>
+		<p>
+			<div id="qr_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
+			<!-- Afficher le QR Code si généré -->
+				{% if qr_code_data %}
+					<img src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code" class="img-fluid border">
+				{% endif %}
+			</div>
+		</p>
+		<p>
+			<div id="bar_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
+			<!-- Afficher le QR Code si généré -->
+				{% if bar_code_data %}
+					<img src="data:image/png;base64,{{ bar_code_data }}" alt="Bar Code" class="img-fluid border">
+				{% endif %}
+			</div>
+		</p>
+			
+    </div>
+</body>
+
+<footer class="bg-dark text-white text-center p-3">
+    <p>&copy; <span id="year"></span> QR Code Generator. Tous droits réservés.</p>
+    <nav>
+        <a href="/" class="text-light text-decoration-none"><i class="bi bi-house-door"></i>Accueil</a>
+    </nav>
+    <div class="mt-2">
+        <i class="bi bi-envelope"> <a class = 'no_ul' href = '/mail'>randriamalalaandrefelix@gmail.com</a></i>
+		<p>
+        <i class="bi bi-linkedin"> <a class = 'no_ul' href='/in'>LinkedIn</a></i>
+		</p>
+    </div>
+	
+	<p>
+    <button onclick="topFunction()" id="backToTop" class="btn btn-secondary mt-3">Retour en haut</button>
+	
+</footer>
+
+<script>
+    function topFunction() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script>
+    document.getElementById("char_bar").addEventListener("input",function (event){
+		this.value = this.value.replace(/[^A-Za-z0-9]/g,"");
+	});
+</script>
+
+<script>
+        // Sélection des liens dans la navbar
+        document.getElementById("nav-qr").addEventListener("click", function () {
+            document.getElementById("form-qr").style.display = "block";
+            document.getElementById("form-bc").style.display = "none";
+
+            // Changer l'onglet actif
+            this.classList.add("active");
+            document.getElementById("nav-bc").classList.remove("active");
+        });
+
+        document.getElementById("nav-bc").addEventListener("click", function () {
+            document.getElementById("form-qr").style.display = "none";
+            document.getElementById("form-bc").style.display = "block";
+
+            // Changer l'onglet actif
+            this.classList.add("active");
+            document.getElementById("nav-qr").classList.remove("active");
+        });
+		
+    </script>
+
+</html>

@@ -1,0 +1,61 @@
+
+body{
+    background-color: rgb(0, 255, 123);
+}
+
+
+header, footer{
+    background-color: white;
+}
+footer {
+	margin-top: 300px;
+}
+
+textarea{
+    max-width: 400px;
+    max-height: 200px;
+    min-width: 400px;
+    min-height: 200px;
+}
+
+#navbarmain{
+	margin-bottom:0;
+}
+
+#fixed-header {
+    position: fixed; /* Fixe le header en haut */
+    top: 0; /* Aligné tout en haut */
+    left: 0;
+    width: 100%; /* Prend toute la largeur */
+    background: #007bff; /* Couleur de fond */
+    color: white; /* Texte en blanc */
+    padding-bottom: 15px 0; /* Espacement intérieur */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour effet 3D */
+    z-index: 1000; /* S'assure qu'il passe au-dessus du contenu */
+	/*margin-bottom: 70px;*/
+}
+
+/* Ajoute un espace en haut pour éviter que le contenu ne soit caché sous le header */
+#content {
+	/*padding-top: 70px;
+    margin-top: 120px;  Ajuste selon la hauteur du header */
+}
+
+footer i {
+    font-size: 1.5rem; /* Augmente la taille */
+    transition: color 0.3s;
+}
+
+footer a:hover i {
+    color: #f39c12; /* Change de couleur au survol */
+}
+
+#qr_image, #bar_image {
+	display: none;
+}
+
+.no_ul{
+	text-decoration: none;
+	color: white;
+}
