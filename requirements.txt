@@ -19,3 +19,4 @@ gunicorn==22.0.0
 Flask==2.2.2
 Werkzeug==2.2.2
 qrcode==7.4.2
+barcode==1.0.4
