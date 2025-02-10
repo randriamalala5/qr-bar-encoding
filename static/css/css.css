@@ -11,6 +11,10 @@ footer {
 	margin-top: 300px;
 }
 
+i>a{
+	font-size: 16px;
+}
+
 textarea{
     max-width: 380px;
     max-height: 200px;
