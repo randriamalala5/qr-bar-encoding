@@ -82,4 +82,5 @@ def barcodegen():
     return render_template('index.html', bar_code_data = bar_code_data, placeholder_bc = phbc, placeholder_qr = phqr, texte_saisi_bc = text)
 
 if __name__ == '__main__':
-    app.run(host = '192.168.137.1', port = 5000, debug=True)
+    app.run(debug=True)
+    #app.run(host = '192.168.137.1', port = 5000, debug=True)
