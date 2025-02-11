@@ -12,9 +12,9 @@ import io
 
 app = Flask(__name__)
 
-@app.route('/google')
+@app.route('/git')
 def redirection_google():
-    return redirect('http://www.google.com')
+    return redirect('https://github.com/randriamalala5')
     
 @app.route('/mail')
 def redirection_mail():
@@ -61,7 +61,6 @@ def qrcodegen():
     
 @app.route('/barcodegen', methods=['GET', 'POST'])
 def barcodegen():
-    #data = "132jgdlkfjg3"   Variable pour stocker le QR Code
     bar_code_data = None
     phqr = random.choice(['Entrez le texte à générer ici.',"Votre texte s'il vous plait.",'Veillez saisir votre texte ici.'])
     phbc = random.choice(['Entrez le texte à générer ici.',"Votre texte s'il vous plait.",'Veillez saisir votre texte ici.'])
@@ -73,8 +72,6 @@ def barcodegen():
                 "code128",
                 text,
                 writer = ImageWriter())
-            #filename = code128.save("barcode_code128")
-            #print(f"Code-barres genere : {barcode__}.png ")
             buffer = io.BytesIO()
             code128.write(buffer)
             image = Image.open(buffer)

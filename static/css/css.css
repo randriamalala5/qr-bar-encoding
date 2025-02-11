@@ -4,16 +4,10 @@ body{
 }
 
 
-header, footer{
-    background-color: white;
-}
 footer {
 	margin-top: 300px;
 }
 
-i>a{
-	font-size: 16px;
-}
 
 textarea{
     max-width: 380px;
@@ -21,6 +15,11 @@ textarea{
     min-width: 380px;
     min-height: 200px;
 }
+
+li>a>i, .footer-section>*>i, .footer-section>*>*>i {
+    font-size: 16px; /* Ajuste selon ton besoin */
+}
+
 
 #navbarmain{
 	margin-bottom:0;
@@ -59,7 +58,42 @@ footer a:hover i {
 	display: none;
 }
 
-.no_ul{
+.no_ul,#no_ul{
 	text-decoration: none;
 	color: white;
+	font-size: 16px;
 }
+
+footer {
+        background: #222;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+    }
+.footer-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+.footer-section {
+        margin: 10px;
+    }
+
+.footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+.footer-section ul li {
+        margin: 5px 0;
+    }
+
+.footer-section a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+.footer-bottom {
+        margin-top: 10px;
+        font-size: 14px;
+    }
