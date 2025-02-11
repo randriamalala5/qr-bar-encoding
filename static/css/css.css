@@ -97,3 +97,7 @@ footer {
         margin-top: 10px;
         font-size: 14px;
     }
+	
+.footer-section p, .footer-section ul li{
+	text-align: center;
+}
