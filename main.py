@@ -67,7 +67,7 @@ def barcodegen():
     phbc = random.choice(['Entrez le texte à générer ici.',"Votre texte s'il vous plait.",'Veillez saisir votre texte ici.'])
     if request.method == 'POST':
         text = request.form.get('char_bar')
-        if text:
+        if text:            
             # Générer un QR Code pour le texte saisi
             code128 = barcode.get(
                 "code128",
