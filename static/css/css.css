@@ -16,7 +16,7 @@ textarea{
     min-height: 200px;
 }
 
-li>a>i, .footer-section>*>i, .footer-section>*>*>i {
+li a i, .footer-section * i, .footer-section * * i {
     font-size: 16px; /* Ajuste selon ton besoin */
 }
 
