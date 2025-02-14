@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/css.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap-icons.css') }}" type="text/css">
-    
+    <!--
 	<script src="../statics/js/js.js"></script>
-	<script src="../statics/js/bootstrap.bundle.min.js"></script>
+	<script src="../statics/js/bootstrap.bundle.min.js"></script> -->
     <title>QR code encoding</title>
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/qrcode.png') }}"><!--qrcode.png-->
 	
@@ -56,7 +56,7 @@
 	</header>
 		
     <div id = 'content' class = 'container d-flex flex-column justify-content-center align-items-center vh-100'>
-		<div>
+		<div id="welcoming">
 			<h2 class="text-center">Bienvenue sur notre générateur d'encodage !</h2>
 			<p class="text-center d-none d-md-block">Nous sommes le <span id="current-date"></span>. Commencez à générer vos propre Codes dès maintenant !</p>
 		</div>
@@ -93,24 +93,57 @@
 			</div> 
 			
         </div>
-		<p>
-			<div id="qr_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
-			<!-- Afficher le QR Code si généré -->
-				{% if qr_code_data %}
-					<img src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code" class="img-fluid border">
-				{% endif %}
-			</div>
-		</p>
-		<p>
-			<div id="bar_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
-			<!-- Afficher le QR Code si généré -->
-				{% if bar_code_data %}
-					<img src="data:image/png;base64,{{ bar_code_data }}" alt="Bar Code" class="img-fluid border">
-				{% endif %}
-			</div>
-		</p>
+		<div id="bloc-image">	
+			<p>
+				<div id="qr_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
+				<!-- Afficher le QR Code si généré -->
+					{% if qr_code_data %}
+						<img id="q_img" src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code" class="img-fluid border">
+					{% endif %}
+				</div>
+			</p>
+			<p>
+				<div id="bar_image" class = 'container d-flex flex-column justify-content-center align-items-center'>
+				<!-- Afficher le QR Code si généré -->
+					{% if bar_code_data %}
+						<img id="b_img" src="data:image/png;base64,{{ bar_code_data }}" alt="Bar Code" class="img-fluid border">
+					{% endif %}
+				</div>
+			</p>
+		</div>
 			
     </div>
+	<!--<div id ='content-ap' class = 'container d-flex flex-column justify-content-center align-items-center vh-100'>-->
+		<div id ='content-ap' class="about-section text-center">
+			<div class="ss-section text-center">
+				<h2><i class="bi bi-info-circle"></i> À propos</h2>
+			</div>
+			
+			<br>
+			<p> Bienvenue sur <strong>qr-bar-encoding.onrender.com</strong>, la plateforme idéale pour générer des <strong>codes-QR</strong> et <strong>codes-barres</strong> facilement.</p>
+
+			<h3> Notre objectif</h3>
+			<p>  Nous rendons l'encodage de données sécurisé et accessible, que ce soit pour un usage professionnel ou personnel.</p>
+
+			<h3> Nos Fonctionnalités</h3>
+			<ul class="list-unstyled text-start gap-3">
+				<li><i class="bi bi-info-circle"></i> Génération de <strong>codes QR</strong> (URL, texte, email, téléphone...)</li>
+				<li><i class="bi bi-info-circle"></i> Création de <strong>codes-barres</strong> (EAN, UPC, Code128)</li>
+				<li><i class="bi bi-info-circle"></i> <strong>Téléchargement</strong> en PNG, SVG ou PDF</li>
+				<li><i class="bi bi-hourglass-split"></i> <strong>À venir :</strong> Analyse des scans et statistiques d’utilisation</li>
+			</ul>
+
+			<h3> Pourquoi nous choisir ?</h3>
+			<ul class="list-unstyled text-start gap-3">
+				<li>✔ Gratuit – Encodez vos données sans frais.</li>
+				<li>✔ 100% en ligne – Aucune installation requise.</li>
+				<li>✔ Compatible avec tous les appareils – PC, tablette, smartphone.</li>
+			</ul>
+
+			<h3> Contact</h3>
+			<p>Des questions ou suggestions ? Contactez-nous à <a href="mail">randriamalalaandrefelix@gmail.com</a>.</p>
+		</div>
+	<!--</div>-->
 </body>
 
 <footer class="bg-dark text-white text-center p-3">	
@@ -128,7 +161,7 @@
             <ul>
                 <li><a href="/"><i class="bi bi-house-door"></i> Accueil</a></li>
                 <li><a href="#"><i class="bi bi-briefcase"></i> Services</a></li>
-                <li><a href="#"><i class="bi bi-info-circle"></i> À propos</a></li>
+                <li><a href="#" id="about"><i class="bi bi-info-circle"></i> À propos</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -139,6 +172,7 @@
 			</ul>
         </div>
     </div>
+	<div class="border-top my-3"></div>
     <div class="footer-bottom">
 		<p>&copy; <span id="year"></span> Generateur des CodeQR & CodeBar . Tous droits réservés.</p>
     </div>
@@ -181,6 +215,21 @@
             document.getElementById("nav-qr").classList.remove("active");
         });
 		
-    </script>
+		document.getElementById("about").addEventListener("click", function () {
+            document.getElementById("form-qr").style.display = "none";
+            document.getElementById("form-bc").style.display = "none";
+            document.getElementById("bloc-image").style.display = "none";
+            document.getElementById("content").style.display = "none";
+            document.getElementById("welcoming").style.display = "none";
+            document.getElementById("content-ap").style.display = "block";
+
+            // Changer l'onglet actif
+            this.classList.add("active");
+            document.getElementById("about").classList.remove("active");
+        });
+		
+</script>
+
+
 
 </html>

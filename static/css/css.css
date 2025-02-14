@@ -101,3 +101,47 @@ footer {
 .footer-section p, .footer-section ul li{
 	text-align: center;
 }
+
+
+
+
+
+
+.about-section {
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.ss-section {
+    background: #f9f9f9;
+    padding: 40px;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.about-section h2, .about-section h3 {
+    color: dark;
+}
+
+.about-section ul {
+    padding-left: 20px;
+}
+
+.about-section a {
+    color: dark;
+    text-decoration: none;
+    font-weight: bold;
+}
+.about-section a:hover {
+    text-decoration: underline;
+}
+
+#content-ap{
+	display: none;
+	margin-top:-670px;
+}
