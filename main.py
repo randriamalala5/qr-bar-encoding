@@ -1,4 +1,5 @@
-from flask import Flask, redirect, render_template, request, Response, url_for
+from flask import Flask, redirect, render_template, request, Response, url_for, send_file
+
 from barcode.writer import ImageWriter
 from PIL import Image, ImageDraw
 import matplotlib.pyplot as plt
@@ -14,11 +15,38 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/down')
+
+# Définir le dossier de téléchargement
+DOWNLOAD_FOLDER = "static/DownloadsWeb"
+if not os.path.exists(DOWNLOAD_FOLDER):
+    os.makedirs(DOWNLOAD_FOLDER)
+
+def download_video(url):
+    """Télécharge une vidéo et retourne le chemin du fichier téléchargé."""
+    ydl_opts = {
+        'outtmpl': os.path.join(DOWNLOAD_FOLDER, 'video_downloaded.%(ext)s'),  # Chemin du fichier
+        'noplaylist': True,  # Ne pas télécharger les playlists
+        'quiet': False,  # Afficher des logs
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        info = ydl.extract_info(url, download=True)
+        filename = ydl.prepare_filename(info)
+    
+    return filename  # Retourne le chemin du fichier téléchargé
+
+@app.route("/download", methods=["GET", "POST"])
 def download():
-    url = request.form.get('url')
-    download_video(url)
-    return render_template('index.html', url = url)
+    if request.method == "POST":
+        video_url = request.form.get("video_url")
+        if video_url:
+            try:
+                filepath = download_video(video_url)
+                return send_file(filepath, as_attachment=True)
+            except Exception as e:
+                return f"Erreur lors du téléchargement : {e}"
+
+    return render_template("index.html")
 
 @app.route('/git')
 def redirection_google():
@@ -87,15 +115,6 @@ def barcodegen():
     return render_template('index.html', bar_code_data = bar_code_data, placeholder_bc = phbc, placeholder_qr = phqr, texte_saisi_bc = text)
 
 
-def download_video(url):
-    ydl_opts = {
-        'outtmpl': 'video_downloaded.%(ext)s',  # Nom du fichier de sortie
-        'noplaylist': True,  # Ne pas télécharger des playlists, juste la vidéo
-        'quiet': False,  # Afficher des logs pour le suivi
-    }
-
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
 
 if __name__ == '__main__':
     app.run(debug=True)

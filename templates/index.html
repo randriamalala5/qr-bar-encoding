@@ -96,17 +96,18 @@
 			</div> 
 			
 			<div id = 'form-url' class="form-container w-100 text-center" style = "display: none;">
-				<h3> Put URL here for your video </h3>
+				<h3> Put here for your video URL </h3>
 				<form action="/download" method="post" class="mb-4">
 					<div class='mb-3'>
-						<textarea class="form-control" placeholder="{{placeholder_bc}}" name="char_bar" id="url" cols="33" rows="20" required></textarea>
+						<!--<input type="text" name="video_url" id="video_url" required><br> -->
+						<textarea class="form-control" placeholder="Mettez ici votre URL video" name="video_url" id="video_url" cols="33" rows="20" required></textarea>
 					</div>
-					
 					<div class="d-flex justify-content-center">
 						<button id = 'btn-url' type="submit" class="btn btn-dark">Download</button>
 					</div>
 				</form>
 			</div>
+			
 			
         </div>
 		<div id="bloc-image">	
@@ -217,19 +218,23 @@
         document.getElementById("nav-qr").addEventListener("click", function () {
             document.getElementById("form-qr").style.display = "block";
             document.getElementById("form-bc").style.display = "none";
+            document.getElementById("form-url").style.display = "none";
 
             // Changer l'onglet actif
             this.classList.add("active");
             document.getElementById("nav-bc").classList.remove("active");
+			document.getElementById("nav-url").classList.remove("active");
         });
 
         document.getElementById("nav-bc").addEventListener("click", function () {
             document.getElementById("form-qr").style.display = "none";
+            document.getElementById("form-url").style.display = "none";
             document.getElementById("form-bc").style.display = "block";
 
             // Changer l'onglet actif
             this.classList.add("active");
             document.getElementById("nav-qr").classList.remove("active");
+			document.getElementById("nav-url").classList.remove("active");
         });
 		
 		document.getElementById("nav-url").addEventListener("click", function () {
@@ -239,7 +244,8 @@
 
             // Changer l'onglet actif
             this.classList.add("active");
-            document.getElementById("nav-url").classList.remove("active");
+            document.getElementById("nav-qr").classList.remove("active");
+			document.getElementById("nav-bc").classList.remove("active");
         });
 		
 		document.getElementById("about").addEventListener("click", function () {
