@@ -219,6 +219,7 @@
             document.getElementById("form-qr").style.display = "block";
             document.getElementById("form-bc").style.display = "none";
             document.getElementById("form-url").style.display = "none";
+            document.getElementById("content-ap").style.display = "none";
 
             // Changer l'onglet actif
             this.classList.add("active");
@@ -229,6 +230,7 @@
         document.getElementById("nav-bc").addEventListener("click", function () {
             document.getElementById("form-qr").style.display = "none";
             document.getElementById("form-url").style.display = "none";
+            document.getElementById("content-ap").style.display = "none";
             document.getElementById("form-bc").style.display = "block";
 
             // Changer l'onglet actif
@@ -240,6 +242,7 @@
 		document.getElementById("nav-url").addEventListener("click", function () {
             document.getElementById("form-qr").style.display = "none";
             document.getElementById("form-bc").style.display = "none";
+            document.getElementById("content-ap").style.display = "none";
             document.getElementById("form-url").style.display = "block";
 
             // Changer l'onglet actif
@@ -259,7 +262,9 @@
 
             // Changer l'onglet actif
             this.classList.add("active");
-            document.getElementById("about").classList.remove("active");
+            document.getElementById("nav-url").classList.remove("active");
+            document.getElementById("nav-qr").classList.remove("active");
+			document.getElementById("nav-bc").classList.remove("active");
         });
 		
 </script>
