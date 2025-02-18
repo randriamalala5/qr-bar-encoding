@@ -37,6 +37,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#" id="nav-bc">BarCode</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" id="nav-url">URL video</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -67,7 +70,7 @@
 		</script>
         <div class="content">
 			<div id = 'form-qr' class="form-container w-100 text-center">
-				<h3>Pour encoder un QRCode </h3>
+				<h3> Pour encoder un QRCode </h3>
 				<form action="/qrcodegen" method="post" class="mb-4">
 					<div class='mb-3'>
 						<textarea class="form-control" placeholder="{{placeholder_qr}}"  name="char" id="char" cols="33" rows="20">{{ texte_saisi_qr }}</textarea>
@@ -80,7 +83,7 @@
 			</div>
 			
 			<div id = 'form-bc' class="form-container w-100 text-center" style = "display: none;">
-				<h3>Pour encoder un BarCode </h3>
+				<h3> Pour encoder un BarCode </h3>
 				<form action="/barcodegen" method="post" class="mb-4">
 					<div class='mb-3'>
 						<textarea class="form-control" placeholder="{{placeholder_bc}}" name="char_bar" id="char_bar" cols="33" rows="20" required> {{ texte_saisi_bc }} </textarea>
@@ -91,6 +94,19 @@
 					</div>
 				</form>
 			</div> 
+			
+			<div id = 'form-url' class="form-container w-100 text-center" style = "display: none;">
+				<h3> Put URL here for your video </h3>
+				<form action="/download" method="post" class="mb-4">
+					<div class='mb-3'>
+						<textarea class="form-control" placeholder="{{placeholder_bc}}" name="char_bar" id="url" cols="33" rows="20" required></textarea>
+					</div>
+					
+					<div class="d-flex justify-content-center">
+						<button id = 'btn-url' type="submit" class="btn btn-dark">Download</button>
+					</div>
+				</form>
+			</div>
 			
         </div>
 		<div id="bloc-image">	
@@ -214,6 +230,16 @@
             // Changer l'onglet actif
             this.classList.add("active");
             document.getElementById("nav-qr").classList.remove("active");
+        });
+		
+		document.getElementById("nav-url").addEventListener("click", function () {
+            document.getElementById("form-qr").style.display = "none";
+            document.getElementById("form-bc").style.display = "none";
+            document.getElementById("form-url").style.display = "block";
+
+            // Changer l'onglet actif
+            this.classList.add("active");
+            document.getElementById("nav-url").classList.remove("active");
         });
 		
 		document.getElementById("about").addEventListener("click", function () {

@@ -5,12 +5,20 @@ import matplotlib.pyplot as plt
 from datetime import date
 from io import BytesIO
 import barcode
+import random
 import qrcode
 import base64
-import random
+import yt_dlp
 import io
+import os
 
 app = Flask(__name__)
+
+@app.route('/down')
+def download():
+    url = request.form.get('url')
+    download_video(url)
+    return render_template('index.html', url = url)
 
 @app.route('/git')
 def redirection_google():
@@ -77,6 +85,17 @@ def barcodegen():
             image = Image.open(buffer)
             bar_code_data = base64.b64encode(buffer.getvalue()).decode('utf-8')
     return render_template('index.html', bar_code_data = bar_code_data, placeholder_bc = phbc, placeholder_qr = phqr, texte_saisi_bc = text)
+
+
+def download_video(url):
+    ydl_opts = {
+        'outtmpl': 'video_downloaded.%(ext)s',  # Nom du fichier de sortie
+        'noplaylist': True,  # Ne pas télécharger des playlists, juste la vidéo
+        'quiet': False,  # Afficher des logs pour le suivi
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
 
 if __name__ == '__main__':
     app.run(debug=True)
