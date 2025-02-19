@@ -9,9 +9,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 	<link rel="stylesheet" href="{{ url_for('static', filename='/css/css.css') }}" type="text/css">
-<!--<link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap-icons.css') }}" type="text/css"> -->
-    <!--
+	<!--<link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/bootstrap-icons.css') }}" type="text/css">  
+	
 	<script src="../statics/js/js.js"></script>
 	<script src="../statics/js/bootstrap.bundle.min.js"></script> -->
     <title>QR code encoding</title>
@@ -60,7 +60,7 @@
 		
     <div id = 'content' class = 'container d-flex flex-column justify-content-center align-items-center vh-100'>
 		<div id="welcoming">
-			<h2 class="text-center">Bienvenue sur notre générateur d'encodage !</h2>
+			<h2 class="text-center">Bienvenue sur notre générateur d'encodage et telechargement video!</h2>
 			<p class="text-center d-none d-md-block">Nous sommes le <span id="current-date"></span>. Commencez à générer vos propre Codes dès maintenant !</p>
 		</div>
 		<script>
@@ -96,7 +96,7 @@
 			</div> 
 			
 			<div id = 'form-url' class="form-container w-100 text-center" style = "display: none;">
-				<h3> Put here for your video URL </h3>
+				<h3> Veillez entrer le lien du video </h3>
 				<form action="/download" method="post" class="mb-4">
 					<div class='mb-3'>
 						<!--<input type="text" name="video_url" id="video_url" required><br> -->
@@ -107,8 +107,6 @@
 					</div>
 				</form>
 			</div>
-			
-			
         </div>
 		<div id="bloc-image">	
 			<p>
