@@ -24,7 +24,7 @@ if not os.path.exists(DOWNLOAD_FOLDER):
 def download_video(url):
     """Télécharge une vidéo et retourne le chemin du fichier téléchargé."""
     ydl_opts = {
-        'outtmpl': os.path.join(DOWNLOAD_FOLDER, 'video_downloaded.%(ext)s'),  # Chemin du fichier
+        'outtmpl': os.path.join(DOWNLOAD_FOLDER, 'download_by_randria_app.%(ext)s'),  # Chemin du fichier
         'noplaylist': True,  # Ne pas télécharger les playlists
         'quiet': False,  # Afficher des logs
     }
