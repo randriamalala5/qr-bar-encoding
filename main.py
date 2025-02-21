@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, Response, url_for, send_file
-
 from barcode.writer import ImageWriter
 from PIL import Image, ImageDraw
 import matplotlib.pyplot as plt
@@ -15,14 +14,14 @@ import os
 
 app = Flask(__name__)
 
-
+"""
 # Définir le dossier de téléchargement
 DOWNLOAD_FOLDER = "static/DownloadsWeb"
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
 def download_video(url):
-    """Télécharge une vidéo et retourne le chemin du fichier téléchargé."""
+    #Télécharge une vidéo et retourne le chemin du fichier téléchargé.
     ydl_opts = {
         'outtmpl': os.path.join(DOWNLOAD_FOLDER, 'download_by_randria_app.%(ext)s'),  # Chemin du fichier
         'noplaylist': True,  # Ne pas télécharger les playlists
@@ -47,6 +46,47 @@ def download():
                 return f"Erreur lors du téléchargement : {e}"
 
     return render_template("index.html")
+"""
+
+
+
+
+
+DOWN_FOLDER = "VideosDownloader"
+os.makedirs(DOWN_FOLDER, exist_ok=True)
+
+def down_video(video_url):
+    #Télécharge une vidéo depuis un lien
+    options = {
+        'format': 'best',
+        'outtmpl': f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+        'noplaylist': True
+    }
+
+    with yt_dlp.YoutubeDL(options) as ydl:
+        info_dict = ydl.extract_info(video_url, download=True)
+        filename = ydl.prepare_filename(info_dict)
+        return filename
+
+@app.route("/vd", methods=["GET", "POST"])
+def index_0():
+    if request.method == "POST":
+        video_url = request.form.get("video_url")
+        if video_url:
+            try:
+                filepath = down_video(video_url)
+                return send_file(filepath, as_attachment=True)
+            except Exception as e:
+                return f"Erreur lors du téléchargement : {e}"
+    return render_template("index.html")
+
+    
+    
+    
+    
+    
+    
+    
 
 @app.route('/git')
 def redirection_google():
