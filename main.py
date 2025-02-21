@@ -59,7 +59,7 @@ def down_video(video_url):
     #Télécharge une vidéo depuis un lien
     options = {
         'format': 'best',
-        'outtmpl': f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+        'outtmpl': f"{DOWN_FOLDER}/%(title)s.%(ext)s",
         'noplaylist': True
     }
 
