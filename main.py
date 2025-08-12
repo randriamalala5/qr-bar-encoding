@@ -83,9 +83,9 @@ def index_0():
     
     
     
-    
-    
-    
+@app.route('/keep-alive')
+def keep_alive():
+    return 'OK', 200  
     
 
 @app.route('/git')
